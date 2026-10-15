@@ -1,0 +1,639 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Yggdrasil de la Vida</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Uncial+Antiqua&family=Spectral:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+Runic&display=swap">
+<style>
+/* Layout: aurora hero sobre crestas de fiordo, luego un reloj anual de 4 540 M de años, capítulos en piedras rúnicas, escala logarítmica, voces del Norte y fuentes. Una sola noche nórdica, sin modo claro. */
+@property --glow-a { syntax: '<color>'; inherits: true; initial-value: #3dffb0; }
+@property --glow-b { syntax: '<color>'; inherits: true; initial-value: #9166ff; }
+:root {
+  --night: #050a18;
+  --deep: #0b1633;
+  --ice: #e9f3ff;
+  --mist: #a3b8d6;
+  --aurora: #3dffb0;
+  --teal: #19d3da;
+  --violet: #9166ff;
+  --magenta: #ff58d0;
+  --ember: #ff7a3d;
+  --gold: #ffcf5a;
+  --sky: #7fd0ff;
+  --line: rgba(160, 190, 235, 0.2);
+  --ridge-back: #0a1633;
+  --ridge-front: #050a18;
+  --f-display: 'Uncial Antiqua', 'Palatino Linotype', Georgia, serif;
+  --f-body: 'Spectral', Georgia, 'Times New Roman', serif;
+  --f-mono: 'IBM Plex Mono', ui-monospace, Menlo, Consolas, monospace;
+  --f-rune: 'Noto Sans Runic', 'Segoe UI Historic', 'Segoe UI Symbol', sans-serif;
+  --glow-a: #3dffb0;
+  --glow-b: #9166ff;
+  color-scheme: dark;
+  transition: --glow-a 1.6s ease, --glow-b 1.6s ease;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--night);
+  color: var(--ice);
+  font-family: var(--f-body);
+  font-size: 18px;
+  line-height: 1.62;
+  overflow-x: hidden;
+}
+.ambient {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background:
+    radial-gradient(60% 45% at 12% 0%, color-mix(in srgb, var(--glow-a) 24%, transparent), transparent 72%),
+    radial-gradient(50% 50% at 92% 38%, color-mix(in srgb, var(--glow-b) 20%, transparent), transparent 70%),
+    radial-gradient(70% 40% at 50% 100%, color-mix(in srgb, var(--glow-a) 10%, transparent), transparent 70%),
+    var(--night);
+}
+main, .nav { position: relative; z-index: 1; }
+.wrap {
+  width: 100%; max-width: 1120px; margin-left: auto; margin-right: auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+a { color: var(--aurora); text-underline-offset: 3px; }
+a:focus-visible, button:focus-visible, .mk:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+.mono { font-family: var(--f-mono); font-size: 0.78rem; letter-spacing: 0.04em; }
+.rune { font-family: var(--f-rune); }
+
+/* nav */
+.nav {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 30;
+  background: color-mix(in srgb, var(--night) 72%, transparent);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--line);
+}
+.nav-in { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 10px; }
+.brand { font-family: var(--f-display); font-size: 1.15rem; color: var(--ice); text-decoration: none; display: flex; gap: 10px; align-items: center; }
+.brand .rune { color: var(--aurora); font-size: 1.3rem; }
+.nav ul { display: flex; gap: 20px; list-style: none; margin: 0; padding: 0; }
+.nav ul a { color: var(--mist); text-decoration: none; font: 500 0.78rem var(--f-mono); letter-spacing: 0.08em; text-transform: uppercase; }
+.nav ul a:hover { color: var(--ice); }
+.progress { position: absolute; left: 0; bottom: -1px; height: 2px; width: 100%; transform-origin: 0 50%; transform: scaleX(0); background: linear-gradient(90deg, var(--aurora), var(--teal), var(--violet), var(--magenta)); }
+@media (max-width: 640px) { .nav ul { display: none; } }
+
+/* hero */
+.hero { position: relative; overflow: hidden; padding-top: clamp(64px, 11vw, 120px); padding-bottom: clamp(150px, 22vw, 230px); isolation: isolate; }
+#aurora { position: absolute; inset: 0; width: 100%; height: 100%; display: block; z-index: -2; }
+.ridge { position: absolute; left: 0; right: 0; bottom: -1px; width: 100%; height: clamp(110px, 18vw, 200px); z-index: -1; display: block; }
+.ridge .back { fill: var(--ridge-back); }
+.ridge .front { fill: var(--ridge-front); }
+.hero-in { position: relative; display: flex; flex-direction: column; gap: 22px; align-items: flex-start; }
+.eyebrow { font: 500 0.8rem var(--f-mono); letter-spacing: 0.16em; text-transform: uppercase; color: var(--ice); display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: center; }
+.eyebrow .rune { color: var(--gold); letter-spacing: 0.3em; font-size: 1.05rem; }
+h1 { font-family: var(--f-display); font-weight: 400; font-size: clamp(2.7rem, 9.5vw, 6.4rem); line-height: 1.02; margin: 0; text-wrap: balance; max-width: 14ch; }
+h1 .grad { background: linear-gradient(100deg, var(--aurora) 10%, var(--teal) 50%, var(--violet) 85%); -webkit-background-clip: text; background-clip: text; color: var(--aurora); -webkit-text-fill-color: transparent; }
+.lede { font-size: clamp(1.1rem, 2.4vw, 1.4rem); max-width: 40ch; margin: 0; color: var(--ice); text-wrap: pretty; }
+.cta { display: flex; flex-wrap: wrap; gap: 12px; }
+.btn { font: 500 0.82rem var(--f-mono); letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; padding: 13px 20px; border-radius: 2px; border: 1px solid transparent; cursor: pointer; display: inline-flex; gap: 10px; align-items: center; }
+.btn.main { background: linear-gradient(100deg, var(--aurora), var(--teal)); color: var(--night); font-weight: 500; }
+.btn.main:hover { filter: brightness(1.1); }
+.btn.ghost { background: color-mix(in srgb, var(--night) 55%, transparent); color: var(--ice); border-color: var(--line); }
+.btn.ghost:hover { border-color: var(--aurora); }
+.stamp { color: var(--mist); }
+
+/* sections */
+.sec { padding-block: clamp(64px, 10vw, 112px); }
+.sec-head { display: grid; grid-template-columns: auto 1fr; gap: 6px 20px; align-items: center; margin-bottom: 40px; }
+.sec-head .rune { grid-row: 1 / span 2; font-size: clamp(2.8rem, 7vw, 4.4rem); color: var(--gold); line-height: 1; text-shadow: 0 0 28px color-mix(in srgb, var(--gold) 55%, transparent); }
+h2 { font-family: var(--f-display); font-weight: 400; font-size: clamp(1.9rem, 5vw, 3.1rem); line-height: 1.08; margin: 0; text-wrap: balance; }
+.sec-head p { margin: 0; color: var(--mist); max-width: 60ch; grid-column: 2; }
+h3 { font-family: var(--f-display); font-weight: 400; font-size: 1.55rem; line-height: 1.15; margin: 0; text-wrap: balance; }
+
+/* ring */
+.ring-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: 32px 48px; align-items: center; }
+.ring-fig { margin: 0; min-width: 0; }
+#ring { width: 100%; height: auto; max-width: 640px; display: block; margin-inline: auto; overflow: visible; }
+#ring .g-line { fill: none; stroke: var(--line); }
+#ring .g-tick { stroke: var(--mist); stroke-width: 1.2; opacity: 0.6; }
+#ring .mlabel { fill: var(--mist); font: 500 15px var(--f-mono); text-anchor: middle; dominant-baseline: middle; letter-spacing: 0.04em; }
+#ring .c-date { fill: var(--ice); font: 400 46px var(--f-display); text-anchor: middle; }
+#ring .c-time { fill: var(--gold); font: 500 22px var(--f-mono); text-anchor: middle; }
+#ring .c-age { fill: var(--mist); font: 400 16px var(--f-mono); text-anchor: middle; }
+#ring .c-cap { fill: var(--mist); font: 500 12px var(--f-mono); text-anchor: middle; letter-spacing: 0.2em; }
+#ring .mk { cursor: pointer; }
+#ring .mk .dot { fill: var(--night); stroke: var(--c); stroke-width: 3.5; transform-box: fill-box; transform-origin: center; transition: transform 0.3s, fill 0.3s; }
+#ring .mk:hover .dot { transform: scale(1.35); }
+#ring .mk.on .dot { fill: var(--c); transform: scale(1.7); filter: url(#glow); }
+#hand { transform-box: view-box; transform-origin: 50% 50%; transition: transform 0.9s cubic-bezier(0.2, 0.8, 0.2, 1); }
+#hand.live { transition: none; }
+#hand line { stroke: var(--ice); stroke-width: 2; stroke-linecap: round; opacity: 0.85; }
+#hand circle { fill: var(--gold); filter: url(#glow); }
+#prog { fill: none; stroke: var(--gold); stroke-width: 4; stroke-linecap: round; opacity: 0.85; }
+.panel { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+.kicker { color: var(--gold); text-transform: uppercase; letter-spacing: 0.12em; }
+.panel p { margin: 0; text-wrap: pretty; }
+.src { color: var(--mist); }
+.src a { color: var(--sky); }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+.chip { font: 500 0.74rem var(--f-mono); padding: 7px 10px; border: 1px solid var(--line); background: color-mix(in srgb, var(--night) 60%, transparent); color: var(--mist); border-radius: 2px; cursor: pointer; display: inline-flex; gap: 8px; align-items: center; }
+.chip i { width: 8px; height: 8px; border-radius: 50%; background: var(--c); }
+.chip:hover { color: var(--ice); }
+.chip[aria-pressed="true"] { color: var(--ice); border-color: var(--c); box-shadow: 0 0 16px -4px var(--c); }
+.legend { display: flex; flex-wrap: wrap; gap: 8px 18px; color: var(--mist); }
+.legend span { display: inline-flex; gap: 8px; align-items: center; }
+.legend i { width: 14px; height: 6px; border-radius: 1px; background: var(--c); }
+
+/* chapters */
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 20px; }
+.card {
+  position: relative; padding: 28px 26px 26px; min-width: 0; display: flex; flex-direction: column; gap: 12px;
+  background: linear-gradient(160deg, color-mix(in srgb, var(--deep) 88%, transparent), color-mix(in srgb, var(--night) 92%, transparent));
+  box-shadow: inset 0 0 0 1px var(--line);
+  clip-path: polygon(0 0, calc(100% - 22px) 0, 100% 22px, 100% 100%, 22px 100%, 0 calc(100% - 22px));
+  overflow: hidden; transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.card::before { content: ''; position: absolute; inset: 0; pointer-events: none; opacity: 0; transition: opacity 0.35s; background: radial-gradient(260px circle at var(--mx, 50%) var(--my, 0%), color-mix(in srgb, var(--c) 30%, transparent), transparent 70%); }
+.card:hover { transform: translateY(-4px); }
+.card:hover::before { opacity: 1; }
+.card:hover .rune-big { opacity: 0.5; transform: translateY(-4px) scale(1.06); }
+.rune-big { position: absolute; top: 8px; right: 14px; font-family: var(--f-rune); font-size: 7rem; line-height: 1; color: var(--c); opacity: 0.2; transition: opacity 0.35s, transform 0.35s; pointer-events: none; }
+.card > * { position: relative; }
+.card .rune-big { position: absolute; }
+.card .ago { color: var(--c); text-transform: uppercase; letter-spacing: 0.1em; margin: 0; }
+.card p { margin: 0; text-wrap: pretty; font-size: 1rem; }
+.card .fact { color: var(--ice); border-top: 1px solid var(--line); padding-top: 12px; font-style: italic; }
+.card .srcs { color: var(--mist); margin-top: auto; }
+.card .srcs a { color: var(--sky); }
+
+/* log chart */
+.chart { display: flex; flex-direction: column; gap: 10px; }
+.row, .axis { display: grid; grid-template-columns: minmax(92px, 170px) minmax(0, 1fr) minmax(64px, 120px); gap: 14px; align-items: center; }
+.row .lbl { font-size: 0.95rem; line-height: 1.25; }
+.row .val { font: 500 0.78rem var(--f-mono); color: var(--mist); text-align: right; }
+.track { position: relative; height: 22px; background: repeating-linear-gradient(90deg, var(--line) 0 1px, transparent 1px 20%); border-right: 1px solid var(--line); }
+.bar { position: absolute; left: 0; top: 3px; bottom: 3px; width: var(--w); background: linear-gradient(90deg, color-mix(in srgb, var(--c) 35%, transparent), var(--c)); box-shadow: 0 0 18px -2px var(--c); transform-origin: 0 50%; }
+.chart.play .bar { animation: grow 1.4s cubic-bezier(0.2, 0.8, 0.2, 1) both; animation-delay: calc(var(--i) * 70ms); }
+@keyframes grow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+.axis { margin-top: 4px; }
+.axis .ticks { position: relative; height: 20px; }
+.axis .ticks span { position: absolute; top: 0; font: 400 0.7rem var(--f-mono); color: var(--mist); transform: translateX(-50%); white-space: nowrap; }
+.axis .ticks span:first-child { transform: none; }
+.axis .ticks span:last-child { transform: translateX(-100%); }
+.note { color: var(--mist); font-size: 0.95rem; max-width: 70ch; margin-top: 18px; }
+@media (max-width: 560px) { .row, .axis { grid-template-columns: 84px minmax(0, 1fr) 54px; gap: 8px; } .row .lbl { font-size: 0.8rem; } .row .val { font-size: 0.66rem; } }
+
+/* north */
+.stones { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 24px; }
+.stone { min-width: 0; padding: 30px 26px; display: flex; flex-direction: column; gap: 14px; background: linear-gradient(180deg, color-mix(in srgb, var(--c) 10%, var(--deep)), var(--night)); border: 1px solid color-mix(in srgb, var(--c) 40%, transparent); border-radius: 90px 90px 6px 6px; padding-top: 54px; }
+.stone .rune { font-size: 2.4rem; color: var(--c); line-height: 1; text-shadow: 0 0 24px var(--c); text-align: center; }
+.stone h3 { text-align: center; }
+.stone p { margin: 0; font-size: 1rem; text-wrap: pretty; }
+.stone .srcs { color: var(--mist); margin-top: auto; }
+.stone .srcs a { color: var(--sky); }
+
+/* sources */
+.sources { columns: 2 320px; column-gap: 40px; padding: 0; margin: 0; list-style: none; }
+.sources li { break-inside: avoid; margin-bottom: 14px; font-size: 0.95rem; color: var(--mist); }
+.sources a { color: var(--sky); word-break: break-word; }
+footer { padding-block: 40px 70px; border-top: 1px solid var(--line); color: var(--mist); font-size: 0.9rem; }
+footer .rune { color: var(--gold); letter-spacing: 0.3em; }
+
+/* reveal */
+.reveal.in { animation: rise 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+@keyframes rise { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: none; } }
+@keyframes shimmerline { from { background-position: 0 0; } to { background-position: 200% 0; } }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal.in, .chart.play .bar { animation: none; }
+  #hand { transition: none; }
+  .card, .card::before, .rune-big { transition: none; }
+  :root { transition: none; }
+}
+</style>
+
+<div class="ambient" aria-hidden="true"></div>
+
+<nav class="nav" aria-label="Secciones">
+  <div class="wrap nav-in">
+    <a class="brand" href="#inicio"><span class="rune" aria-hidden="true">ᛇ</span>Yggdrasil</a>
+    <ul>
+      <li><a href="#anio">El año</a></li>
+      <li><a href="#capitulos">Capítulos</a></li>
+      <li><a href="#escala">Escala</a></li>
+      <li><a href="#norte">Norte</a></li>
+      <li><a href="#fuentes">Fuentes</a></li>
+    </ul>
+  </div>
+  <div class="progress" id="progress"></div>
+</nav>
+
+<main>
+<header class="hero" id="inicio" data-a="#3dffb0" data-b="#9166ff">
+  <canvas id="aurora" aria-hidden="true"></canvas>
+  <svg class="ridge" viewBox="0 0 1440 200" preserveAspectRatio="none" aria-hidden="true">
+    <path class="back" d="M0 120 L80 70 L150 108 L240 36 L330 100 L420 58 L520 112 L610 46 L700 96 L790 28 L880 92 L960 62 L1050 108 L1140 42 L1230 98 L1320 66 L1440 108 L1440 200 L0 200Z"/>
+    <path class="front" d="M0 160 L100 128 L200 152 L300 112 L420 156 L540 132 L650 164 L780 120 L900 158 L1010 130 L1130 162 L1250 126 L1350 154 L1440 136 L1440 200 L0 200Z"/>
+  </svg>
+  <div class="wrap hero-in">
+    <p class="eyebrow"><span class="rune" aria-hidden="true">ᚠᚢᚦᚨᚱᚲ</span><span>Una saga de 4 540 millones de años</span></p>
+    <h1>Yggdrasil de la <span class="grad">Vida</span></h1>
+    <p class="lede">La evolución contada como un solo año terrestre, desde los primeros microbios hasta Homo sapiens, con datos de museos, universidades y el Comité Nobel.</p>
+    <div class="cta">
+      <a class="btn main" href="#anio">Recorrer el año de la Tierra</a>
+      <a class="btn ghost" href="#capitulos">Leer los capítulos</a>
+    </div>
+    <p class="mono stamp">AMNH · Smithsonian · Harvard · Universidad de Uppsala · Comité Nobel</p>
+  </div>
+</header>
+
+<section class="sec" id="anio" data-a="#ff7a3d" data-b="#19d3da">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="rune" aria-hidden="true">ᛊ</span>
+      <h2>El año de la Tierra</h2>
+      <p>Comprimamos 4 540 millones de años en 365 días. Cada marca del anillo es un hito de la vida, colocado a escala. Toca uno, o pulsa reproducir y mira pasar el año.</p>
+    </div>
+    <div class="ring-grid">
+      <figure class="ring-fig reveal">
+        <svg id="ring" viewBox="0 0 640 640" role="img" aria-label="Reloj anual de la historia de la Tierra con once hitos de la evolución"></svg>
+      </figure>
+      <div class="panel reveal" aria-live="polite">
+        <p class="mono kicker" id="ev-kicker"></p>
+        <h3 id="ev-title"></h3>
+        <p id="ev-text"></p>
+        <p class="mono src" id="ev-src"></p>
+        <div class="cta"><button class="btn main" id="play" type="button">▶ Reproducir el año</button></div>
+        <div class="chips" id="chips"></div>
+        <div class="mono legend" id="legend"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="capitulos" data-a="#9166ff" data-b="#ff58d0">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="rune" aria-hidden="true">ᚱ</span>
+      <h2>Siete capítulos de la saga</h2>
+      <p>De la sopa de microbios a nuestra especie, en orden cronológico. Las fechas son aproximadas y cambian cuando aparecen fósiles nuevos.</p>
+    </div>
+    <div class="cards" id="cards"></div>
+  </div>
+</section>
+
+<section class="sec" id="escala" data-a="#19d3da" data-b="#3dffb0">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="rune" aria-hidden="true">ᛏ</span>
+      <h2>La escalera del tiempo</h2>
+      <p>Cuánto tiempo atrás ocurrió cada hito, en escala logarítmica. Cada marca vale diez veces la anterior, así que una barra el doble de larga no es el doble de antigua.</p>
+    </div>
+    <div class="chart reveal" id="chart" role="img" aria-label="Gráfico de barras en escala logarítmica con la antigüedad de cada hito"></div>
+    <p class="note">En una escala lineal, Homo sapiens ocuparía menos de la milésima parte de un píxel. La escala logarítmica permite verlo junto a la Tierra recién nacida.</p>
+  </div>
+</section>
+
+<section class="sec" id="norte" data-a="#7fd0ff" data-b="#9166ff">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="rune" aria-hidden="true">ᛒ</span>
+      <h2>Voces del Norte</h2>
+      <p>Tres historias de esta saga pasan por el Norte: Suecia, el Ártico canadiense y el laboratorio de un genetista sueco.</p>
+    </div>
+    <div class="stones" id="stones"></div>
+  </div>
+</section>
+
+<section class="sec" id="fuentes" data-a="#ffcf5a" data-b="#3dffb0">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="rune" aria-hidden="true">ᛟ</span>
+      <h2>Fuentes</h2>
+      <p>Las fechas provienen de museos, universidades, revistas científicas y el Comité Nobel. Algunas cifras varían entre fuentes, por eso aparecen como aproximadas.</p>
+    </div>
+    <ul class="sources reveal" id="sources"></ul>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p><span class="rune" aria-hidden="true">ᚠᚢᚦᚨᚱᚲ</span><br>Yggdrasil, el fresno del mundo en la mitología nórdica, sirve aquí de metáfora del árbol de la vida. Los datos científicos no provienen de la mitología.</p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var $ = function (s) { return document.querySelector(s); };
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var nf = function (n) { return String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, ' '); };
+  var ageTxt = function (ma) { return ma >= 1 ? nf(ma) + ' millones de años' : nf(ma * 1000) + ' mil años'; };
+  var dayOf = function (ma) { return (4540 - ma) / 4540 * 365; };
+  var MD = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+  var MN = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'];
+  function fmt(day) {
+    day = Math.min(Math.max(day, 0), 364.9999);
+    var d = Math.floor(day), f = day - d, m = 0;
+    while (d >= MD[m]) { d -= MD[m]; m++; }
+    var mins = Math.floor(f * 1440);
+    var h = String(Math.floor(mins / 60)).padStart(2, '0');
+    var mi = String(mins % 60).padStart(2, '0');
+    return { date: (d + 1) + ' ' + MN[m], time: h + ':' + mi };
+  }
+
+  var S = {
+    amnh: ['AMNH, Hall of Planet Earth', 'https://www.amnh.org/exhibitions/permanent/planet-earth/how-has-the-earth-evolved/life-explodes/the-age-of-microbes'],
+    uct: ['Universidad de Ciudad del Cabo', 'https://open.uct.ac.za/server/api/core/bitstreams/183054cc-56d4-412b-b768-ea72b3d3852a/content'],
+    diercke: ['Diercke, Historia de la Tierra', 'https://www.diercke.com/node/19484980'],
+    harvard: ['Harvard Gazette, 2006', 'https://news.harvard.edu/gazette/story/2006/04/newly-found-species-fills-evolutionary-gap-between-fish-and-land-animals'],
+    newswise: ['Newswise (NSF)', 'https://www.newswise.com/articles/new-fossils-fill-evolutionary-gap-between-fish-and-land-animals'],
+    live: ['Live Science', 'https://livescience.com/4025-fishy-land-beast-bridges-evolutionary-gap.html'],
+    nature: ['Nature News, 2006 (copia en BioEd Online)', 'https://www.bioedonline.org/news/nature-news-archive/fish-that-crawled-out-water/'],
+    ut: ['Universe Today', 'https://www.universetoday.com/tag/chicxulub/'],
+    leeds: ['Universidad de Leeds', 'https://see.leeds.ac.uk/enviroweb/our_environment/1_evolution/evo12.php'],
+    umich: ['Universidad de Míchigan', 'https://prod.lsa.umich.edu/eeb/news-events/all-news/archived-news/20162211/052/study-suggests-ground-dwelling-mammals-survived-mass-extinction-.html'],
+    jbh: ['Journal of Big History, Chicxulub', 'https://jbh.journals.villanova.edu/index.php/JBH/article/view/2724'],
+    smagz: ['Smithsonian Magazine, línea de tiempo de Homo sapiens', 'https://www.smithsonianmag.com/science-nature/an-evolutionary-timeline-of-homo-sapiens-180976807/'],
+    sifacts: ['Smithsonian, Human Origins Facts', 'https://www.si.edu/newsdesk/factsheets/did-you-know-human-origins-facts'],
+    nobel: ['Comité Nobel, 3 oct. 2022 (reproducido por CIISB)', 'https://www.ciisb.org/news/the-2022-nobel-prize-in-physiology-or-medicine-has-been-awarded-to-svante-paeaebo'],
+    arch: ['ARCHAEOLOGY, 2022', 'https://archaeology.org/news/2022/10/03/221004-paleogenomics-nobel-prize/'],
+    bios: ['Biostock, 2022', 'https://biostock.se/en/2022/10/svante-paabo-tilldelas-nobelpriset-i-fysiologi-eller-medicin/'],
+    ucmp: ['UC Berkeley, Linneo', 'https://ucmp.berkeley.edu/history/linnaeus.html'],
+    upenn: ['Universidad de Pensilvania, Linneo', 'https://knarf.english.upenn.edu/People/linnaeus.html']
+  };
+  var link = function (k) { return '<a href="' + S[k][1] + '" target="_blank" rel="noopener">' + S[k][0] + '</a>'; };
+
+  var EONS = [
+    { n: 'Hadeano', from: 4540, to: 4000, c: '#ff7a3d' },
+    { n: 'Arcaico', from: 4000, to: 2500, c: '#19d3da' },
+    { n: 'Proterozoico', from: 2500, to: 541, c: '#9166ff' },
+    { n: 'Fanerozoico', from: 541, to: 0, c: '#3dffb0' }
+  ];
+  var eonOf = function (ma) { for (var i = 0; i < EONS.length; i++) { if (ma > EONS[i].to) return EONS[i]; } return EONS[3]; };
+
+  var EV = [
+    { ma: 4540, short: 'Tierra', t: 'Nace la Tierra', x: 'La Tierra se forma hace unos 4 540 millones de años. Durante el Hadeano era un mundo de roca fundida bombardeado por meteoritos. Cristales de circón indican que ya había agua líquida hace unos 4 400 millones de años.', s: ['diercke'], noMarker: true },
+    { ma: 3500, short: 'Vida', t: 'Primeros rastros de vida', x: 'Rocas de Australia Occidental de unos 3 500 millones de años contienen formas microscópicas que algunos científicos interpretan como bacterias fósiles. Señales químicas en otras rocas sugieren vida desde hace unos 3 900 millones de años.', s: ['amnh', 'uct'] },
+    { ma: 2400, short: 'Oxígeno', t: 'La Gran Oxidación', x: 'Bacterias fotosintéticas, como las cianobacterias, liberaron oxígeno. Al acumularse en la atmósfera, hace unos 2 400 millones de años, cambió el planeta y creó condiciones para vidas más complejas.', s: ['amnh', 'uct'] },
+    { ma: 2000, short: 'Eucariotas', t: 'Células con núcleo', x: 'Aparecen las células eucariotas. Según la teoría de la endosimbiosis, una célula engulló a otra y esta acabó convertida en mitocondria o cloroplasto de las células actuales.', s: ['uct'] },
+    { ma: 1200, short: 'Multicelulares', t: 'Vida multicelular', x: 'Surgen cuerpos de muchas células: medusas, gusanos y esponjas. El museo AMNH sitúa el comienzo hace unos 1 200 millones de años. Otros estudios proponen fechas más recientes, hasta unos 575 millones.', s: ['amnh', 'uct'] },
+    { ma: 541, short: 'Cámbrico', t: 'La explosión cámbrica', x: 'En una ventana de unos 10 millones de años, el registro fósil se llena de animales con ojos, patas, escamas y partes especializadas. La mayoría de los grandes grupos animales actuales ya aparece.', s: ['amnh'] },
+    { ma: 450, short: 'Tierra firme', t: 'Plantas y hongos colonizan la tierra', x: 'Hace unos 450 millones de años, plantas y hongos empiezan a cubrir el suelo seco y transforman los paisajes y la atmósfera. Después seguirán los animales.', s: ['diercke'] },
+    { ma: 375, short: 'Tiktaalik', t: 'Tiktaalik, el pez con cuello', x: 'Tiktaalik roseae tiene branquias y escamas de pez, pero también cuello móvil, costillas robustas y articulaciones de muñeca. Vivió entre el pez Panderichthys (385 M) y los primeros tetrápodos, como Acanthostega (365 M).', s: ['harvard', 'newswise', 'live'] },
+    { ma: 230, short: 'Dinosaurios', t: 'Aparecen los dinosaurios', x: 'Hace unos 230 millones de años comienza el reinado de los dinosaurios, que durará cerca de 160 millones de años. Los mamíferos pequeños crecen a su sombra.', s: ['ut'] },
+    { ma: 66, short: 'Asteroide', t: 'El asteroide de Chicxulub', x: 'Un asteroide de unos 10 km golpea la península de Yucatán. Se extingue cerca del 75 % de las especies, incluidos los dinosaurios no avianos. Los mamíferos que sobreviven se diversificarán por todo el planeta.', s: ['leeds', 'umich', 'jbh'] },
+    { ma: 0.3, short: 'Homo sapiens', t: 'Aparece Homo sapiens', x: 'Los fósiles más antiguos de nuestra especie tienen unos 300 000 años y proceden de África. Hace unos 70 000 años convivían al menos cuatro especies humanas. Hoy solo queda la nuestra.', s: ['smagz', 'sifacts'] }
+  ];
+  EV.forEach(function (e) { e.eon = eonOf(e.ma); e.day = dayOf(e.ma); e.ang = e.day / 365 * 360; });
+
+  /* ---------- ring ---------- */
+  var NS = 'http://www.w3.org/2000/svg', svg = $('#ring'), C = 320, RR = 245;
+  svg.innerHTML = '<defs><filter id="glow" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>';
+  function el(n, a, p) { var e = document.createElementNS(NS, n); for (var k in a) e.setAttribute(k, a[k]); (p || svg).appendChild(e); return e; }
+  function pol(r, deg) { var t = deg * Math.PI / 180; return [C + r * Math.sin(t), C - r * Math.cos(t)]; }
+  function arc(r, a0, a1) {
+    var p0 = pol(r, a0), p1 = pol(r, a1);
+    return 'M' + p0[0].toFixed(2) + ' ' + p0[1].toFixed(2) + 'A' + r + ' ' + r + ' 0 ' + (a1 - a0 > 180 ? 1 : 0) + ' 1 ' + p1[0].toFixed(2) + ' ' + p1[1].toFixed(2);
+  }
+  el('circle', { cx: C, cy: C, r: 200, 'class': 'g-line' });
+  el('circle', { cx: C, cy: C, r: 150, 'class': 'g-line' });
+  EONS.forEach(function (o) {
+    var a0 = dayOf(o.from) / 365 * 360 + (o.from === 4540 ? 0.4 : 0.3);
+    var a1 = (o.to === 0 ? 360 : dayOf(o.to) / 365 * 360) - 0.3;
+    el('path', { d: arc(RR, a0, a1), fill: 'none', stroke: o.c, 'stroke-width': 26, opacity: 0.92 });
+  });
+  var cum = 0;
+  MD.forEach(function (len, i) {
+    var a = cum / 365 * 360, mid = (cum + len / 2) / 365 * 360;
+    var p0 = pol(264, a), p1 = pol(274, a);
+    el('line', { x1: p0[0], y1: p0[1], x2: p1[0], y2: p1[1], 'class': 'g-tick' });
+    var pl = pol(293, mid);
+    var tx = el('text', { x: pl[0], y: pl[1], 'class': 'mlabel' });
+    tx.textContent = MN[i];
+    cum += len;
+  });
+  var prog = el('path', { id: 'prog', d: '' });
+  var cDate = el('text', { x: C, y: C - 8, 'class': 'c-date' });
+  var cTime = el('text', { x: C, y: C + 24, 'class': 'c-time' });
+  var cAge = el('text', { x: C, y: C + 54, 'class': 'c-age' });
+  var cCap = el('text', { x: C, y: C - 62, 'class': 'c-cap' }); cCap.textContent = 'AÑO DE LA TIERRA';
+  var markers = [];
+  EV.forEach(function (e, i) {
+    if (e.noMarker) { markers.push(null); return; }
+    var p = pol(RR, e.ang);
+    var g = el('g', { 'class': 'mk', tabindex: 0, role: 'button', 'aria-label': e.t + ', hace ' + ageTxt(e.ma), style: '--c:' + e.eon.c });
+    el('circle', { cx: p[0], cy: p[1], r: 16, fill: 'transparent' }, g);
+    el('circle', { cx: p[0], cy: p[1], r: 7, 'class': 'dot' }, g);
+    g.addEventListener('click', function () { stop(); show(i); });
+    g.addEventListener('keydown', function (ev) { if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); stop(); show(i); } });
+    markers.push(g);
+  });
+  var hand = el('g', { id: 'hand' });
+  el('line', { x1: C, y1: C - 150, x2: C, y2: C - 262 }, hand);
+  el('circle', { cx: C, cy: C - RR, r: 5 }, hand);
+
+  var chips = $('#chips');
+  var chipEls = EV.map(function (e, i) {
+    var b = document.createElement('button');
+    b.type = 'button'; b.className = 'chip'; b.style.setProperty('--c', e.eon.c);
+    b.innerHTML = '<i></i>' + e.short;
+    b.setAttribute('aria-pressed', 'false');
+    b.addEventListener('click', function () { stop(); show(i); });
+    chips.appendChild(b);
+    return b;
+  });
+  $('#legend').innerHTML = EONS.map(function (o) {
+    return '<span style="--c:' + o.c + '"><i></i>' + o.n + ' · ' + nf(o.from) + '–' + nf(o.to) + ' M</span>';
+  }).join('');
+
+  var cur = -1;
+  function setCenter(day) {
+    var f = fmt(day), ma = Math.max(0, 4540 - day / 365 * 4540);
+    cDate.textContent = f.date; cTime.textContent = f.time + ' h';
+    cAge.textContent = 'hace ' + ageTxt(ma < 1 ? Math.max(ma, 0.001) : ma);
+  }
+  function show(i) {
+    cur = i;
+    var e = EV[i];
+    markers.forEach(function (m, k) { if (m) m.classList.toggle('on', k === i); });
+    chipEls.forEach(function (c, k) { c.setAttribute('aria-pressed', k === i ? 'true' : 'false'); });
+    $('#ev-kicker').textContent = e.eon.n + ' · hace ' + ageTxt(e.ma);
+    $('#ev-title').textContent = e.t;
+    $('#ev-text').textContent = e.x;
+    $('#ev-src').innerHTML = 'Fuente: ' + e.s.map(link).join(' · ');
+    if (!playing) {
+      hand.classList.remove('live');
+      hand.style.transform = 'rotate(' + e.ang + 'deg)';
+      prog.setAttribute('d', '');
+      setCenter(e.day);
+    }
+  }
+
+  var playing = false, raf = 0, timer = 0, t0 = 0, nextIdx = 0;
+  var btn = $('#play');
+  function stop() {
+    if (!playing) return;
+    playing = false; cancelAnimationFrame(raf); clearInterval(timer);
+    btn.textContent = '▶ Reproducir el año';
+    hand.classList.remove('live');
+    prog.setAttribute('d', '');
+  }
+  function play() {
+    if (playing) { stop(); return; }
+    playing = true; btn.textContent = '■ Detener';
+    nextIdx = 1;
+    if (reduce) {
+      var k = 0;
+      timer = setInterval(function () {
+        show(k); hand.style.transform = 'rotate(' + EV[k].ang + 'deg)'; setCenter(EV[k].day); k++;
+        if (k >= EV.length) { clearInterval(timer); playing = false; btn.textContent = '▶ Reproducir el año'; }
+      }, 2400);
+      return;
+    }
+    hand.classList.add('live');
+    show(0);
+    t0 = performance.now();
+    var DUR = 22000;
+    (function step(now) {
+      if (!playing) return;
+      var u = Math.min((now - t0) / DUR, 1), day = u * 365, a = u * 360;
+      hand.style.transform = 'rotate(' + a + 'deg)';
+      prog.setAttribute('d', a > 1 ? arc(222, 0, Math.min(a, 359.9)) : '');
+      setCenter(day);
+      while (nextIdx < EV.length && EV[nextIdx].day <= day) { var keep = playing; show(nextIdx); playing = keep; nextIdx++; }
+      if (u < 1) { raf = requestAnimationFrame(step); }
+      else { playing = false; btn.textContent = '▶ Reproducir el año'; hand.classList.remove('live'); prog.setAttribute('d', ''); show(EV.length - 1); }
+    })(t0);
+  }
+  btn.addEventListener('click', play);
+  show(5);
+
+  /* ---------- chapters ---------- */
+  var CH = [
+    { r: 'ᚺ', c: '#ff7a3d', ago: 'Hace 3 500 millones de años', t: 'Agua y primeras células', p: 'La Tierra se forma hace unos 4 540 millones de años. Los primeros rastros de vida son microbios: en rocas de Australia Occidental aparecen formas microscópicas que podrían ser bacterias fósiles, y señales químicas apuntan a vida desde hace unos 3 900 millones de años.', f: 'Durante unos 3 000 millones de años, la vida fue solo microscópica.', s: ['amnh'] },
+    { r: 'ᛊ', c: '#19d3da', ago: 'Hace 2 400 millones de años', t: 'La luz que cambió el aire', p: 'Las bacterias fotosintéticas empezaron a producir oxígeno. Al acumularse en la atmósfera, el oxígeno transformó el planeta y abrió la puerta a formas de vida más complejas.', f: 'Los primeros ingenieros del clima fueron microbios.', s: ['amnh', 'uct'] },
+    { r: 'ᛜ', c: '#9166ff', ago: 'Hace 2 000 a 1 200 millones de años', t: 'Células con núcleo', p: 'Las células eucariotas guardan su ADN en un núcleo. La endosimbiosis explica que mitocondrias y cloroplastos sean antiguas células engullidas. Más tarde llegan las primeras formas multicelulares: medusas, gusanos y esponjas.', f: 'Las fechas del primer cuerpo multicelular varían entre estudios, de 1 200 a 575 millones de años.', s: ['uct', 'amnh'] },
+    { r: 'ᚲ', c: '#3dffb0', ago: 'Hace 541 millones de años', t: 'La explosión cámbrica', p: 'En una ventana geológica breve, de unos 10 millones de años, el registro fósil se llena de animales con ojos, patas y escamas. La mayoría de los grandes grupos animales actuales ya está representada.', f: 'Diez millones de años son el 0,2 % de la historia de la Tierra.', s: ['amnh'] },
+    { r: 'ᚱ', c: '#7fd0ff', ago: 'Hace 375 millones de años', t: 'De la aleta a la pata', p: 'Tiktaalik, hallado en la isla Ellesmere del Ártico canadiense, combina branquias y escamas con cuello móvil, costillas fuertes y una muñeca articulada. Podía apoyar su cuerpo en aguas muy someras o incluso en tierra.', f: 'Hace 375 millones de años ese lugar estaba sobre el ecuador y tenía clima subtropical.', s: ['harvard', 'live'] },
+    { r: 'ᚨ', c: '#ff58d0', ago: 'Hace 66 millones de años', t: 'Cae una roca del cielo', p: 'Un asteroide de unos 10 km choca en Yucatán y deja el cráter de Chicxulub, de más de 150 km. Siguen incendios, oscuridad y frío. Se extingue cerca del 75 % de las especies. Sobreviven mamíferos pequeños, sobre todo terrestres, que luego se diversifican.', f: 'Los dinosaurios habían dominado unos 160 millones de años.', s: ['leeds', 'umich', 'ut'] },
+    { r: 'ᛗ', c: '#ffcf5a', ago: 'Hace 300 000 años', t: 'Nuestra especie', p: 'Los fósiles más antiguos de Homo sapiens, de unos 300 000 años, se hallan en África. Al salir del continente nos cruzamos con neandertales y denisovanos, y aún llevamos parte de su ADN.', f: 'Los europeos y asiáticos actuales tienen entre un 1 y un 4 % de ADN neandertal.', s: ['smagz', 'nobel', 'bios'] }
+  ];
+  var cards = $('#cards');
+  CH.forEach(function (c, i) {
+    var a = document.createElement('article');
+    a.className = 'card reveal'; a.style.setProperty('--c', c.c);
+    a.innerHTML = '<span class="rune-big" aria-hidden="true">' + c.r + '</span>' +
+      '<p class="mono ago">Capítulo ' + ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII'][i] + ' · ' + c.ago + '</p>' +
+      '<h3>' + c.t + '</h3><p>' + c.p + '</p><p class="fact">' + c.f + '</p>' +
+      '<p class="mono srcs">Fuente: ' + c.s.map(link).join(' · ') + '</p>';
+    a.addEventListener('pointermove', function (ev) {
+      var r = a.getBoundingClientRect();
+      a.style.setProperty('--mx', (ev.clientX - r.left) + 'px');
+      a.style.setProperty('--my', (ev.clientY - r.top) + 'px');
+    });
+    cards.appendChild(a);
+  });
+
+  /* ---------- log chart ---------- */
+  var chart = $('#chart'), lo = 5, hi = 10, html = '';
+  var TK = ['100 mil', '1 M', '10 M', '100 M', '1 000 M', '10 000 M'];
+  EV.forEach(function (e, i) {
+    var w = (Math.log10(e.ma * 1e6) - lo) / (hi - lo) * 100;
+    html += '<div class="row"><div class="lbl">' + e.short + '</div><div class="track"><i class="bar" style="--w:' + w.toFixed(1) + '%;--c:' + e.eon.c + ';--i:' + i + '"></i></div><div class="val">' + (e.ma >= 1 ? nf(e.ma) + ' M' : nf(e.ma * 1000) + ' mil') + '</div></div>';
+  });
+  html += '<div class="axis"><div></div><div class="ticks">' + TK.map(function (t, i) { return '<span style="left:' + (i * 20) + '%">' + t + '</span>'; }).join('') + '</div><div class="mono val">años atrás</div></div>';
+  chart.innerHTML = html;
+
+  /* ---------- north ---------- */
+  var ST = [
+    { r: 'ᛉ', c: '#3dffb0', t: 'Linneo, el sueco que ordenó la vida', p: 'Carl von Linné nació en Råshult, estudió en Lund y Uppsala y viajó a Laponia en 1732. Su Systema Naturae (1735) fijó el sistema de nombres con género y especie que usamos hoy. En 1758 clasificó a los humanos como Homo sapiens. Linneo no aceptaba la evolución, pero su orden preparó el terreno: Darwin presentó su teoría ante la Sociedad Linneana en 1858.', s: ['ucmp', 'upenn'] },
+    { r: 'ᛁ', c: '#7fd0ff', t: 'Tiktaalik, un nombre inuit', p: 'El fósil apareció en Nunavut, al norte del círculo polar. Su nombre es una palabra inuit para un pez grande de aguas someras, sugerida por el Consejo de Ancianos de Nunavut. Per Ahlberg, de la Universidad de Uppsala, dijo en Nature que el hallazgo reduce mucho el hueco del registro fósil entre peces y tetrápodos.', s: ['newswise', 'nature'] },
+    { r: 'ᛗ', c: '#ffcf5a', t: 'Svante Pääbo, Nobel 2022', p: 'Este genetista sueco del Instituto Max Planck publicó en 2010 el primer genoma neandertal y descubrió a los denisovanos a partir de un hueso de dedo hallado en una cueva de Siberia. Recibió el Nobel de Fisiología o Medicina en 2022 y es fundador de la paleogenómica. Su padre, Sune Bergström, ganó el mismo premio en 1982.', s: ['nobel', 'arch', 'bios'] }
+  ];
+  $('#stones').innerHTML = ST.map(function (s) {
+    return '<article class="stone reveal" style="--c:' + s.c + '"><span class="rune" aria-hidden="true">' + s.r + '</span><h3>' + s.t + '</h3><p>' + s.p + '</p><p class="mono srcs">Fuente: ' + s.s.map(link).join(' · ') + '</p></article>';
+  }).join('');
+
+  /* ---------- sources ---------- */
+  $('#sources').innerHTML = Object.keys(S).map(function (k) { return '<li>' + link(k) + '</li>'; }).join('');
+
+  /* ---------- aurora ---------- */
+  var cv = $('#aurora'), cx = cv.getContext('2d'), W = 0, H = 0, stars = [], vis = true;
+  var COL = [[61, 255, 176], [25, 211, 218], [145, 102, 255], [255, 88, 208]];
+  function fit() {
+    var r = cv.getBoundingClientRect();
+    W = cv.width = Math.max(320, Math.round(r.width / 2));
+    H = cv.height = Math.max(200, Math.round(r.height / 2));
+    stars = [];
+    for (var i = 0, n = Math.round(W * H / 800); i < n; i++) stars.push({ x: Math.random() * W, y: Math.random() * H * 0.75, r: Math.random() * 1.2 + 0.4, p: Math.random() * 6.28, s: Math.random() * 1.5 + 0.5 });
+  }
+  function frame(t) {
+    cx.clearRect(0, 0, W, H);
+    for (var i = 0; i < stars.length; i++) {
+      var s = stars[i], a = 0.3 + 0.6 * Math.abs(Math.sin(t * 0.0006 * s.s + s.p));
+      cx.fillStyle = 'rgba(220,235,255,' + a.toFixed(2) + ')';
+      cx.fillRect(s.x, s.y, s.r, s.r);
+    }
+    cx.globalCompositeOperation = 'lighter';
+    for (var k = 0; k < COL.length; k++) {
+      var c = COL[k];
+      for (var x = 0; x < W; x += 2) {
+        var u = x / W;
+        var y0 = H * (0.14 + 0.08 * k) + Math.sin(u * 5 + t * 0.00035 * (k + 1) + k * 2) * H * 0.07 + Math.sin(u * 13 - t * 0.0006 + k) * H * 0.025;
+        var len = H * (0.36 + 0.14 * Math.sin(u * 3.4 + t * 0.0003 + k * 1.3));
+        var inten = 0.3 + 0.7 * Math.pow(0.5 + 0.5 * Math.sin(u * 7.5 + t * 0.0004 * (1 + k * 0.3) + k * 1.7), 1.6);
+        var al = 0.42 * inten * (k === 3 ? 0.6 : 1);
+        var g = cx.createLinearGradient(0, y0, 0, y0 + len);
+        g.addColorStop(0, 'rgba(' + c + ',0)');
+        g.addColorStop(0.12, 'rgba(' + c + ',' + al.toFixed(3) + ')');
+        g.addColorStop(1, 'rgba(' + c + ',0)');
+        cx.fillStyle = g;
+        cx.fillRect(x, y0, 2.2, len);
+      }
+    }
+    cx.globalCompositeOperation = 'source-over';
+  }
+  fit();
+  if (reduce) { frame(9000); window.addEventListener('resize', function () { fit(); frame(9000); }); }
+  else {
+    window.addEventListener('resize', fit);
+    new IntersectionObserver(function (es) { vis = es[0].isIntersecting; }).observe($('#inicio'));
+    (function loop(t) { if (vis) frame(t); requestAnimationFrame(loop); })(0);
+  }
+
+  /* ---------- reveal, glow and progress ---------- */
+  var first = true;
+  var rv = new IntersectionObserver(function (es) {
+    es.forEach(function (e) {
+      if (e.isIntersecting) {
+        if (!first && !reduce) e.target.classList.add('in');
+        if (e.target.id === 'chart' && !reduce) { e.target.classList.add('play'); }
+        rv.unobserve(e.target);
+      }
+    });
+    first = false;
+  }, { rootMargin: '0px 0px -12% 0px' });
+  document.querySelectorAll('.reveal').forEach(function (n) { rv.observe(n); });
+
+  var gl = new IntersectionObserver(function (es) {
+    es.forEach(function (e) {
+      if (e.isIntersecting) {
+        document.documentElement.style.setProperty('--glow-a', e.target.dataset.a);
+        document.documentElement.style.setProperty('--glow-b', e.target.dataset.b);
+      }
+    });
+  }, { threshold: 0.3 });
+  document.querySelectorAll('[data-a]').forEach(function (n) { gl.observe(n); });
+
+  var pg = $('#progress'), tick = false;
+  function onScroll() {
+    if (tick) return; tick = true;
+    requestAnimationFrame(function () {
+      var h = document.documentElement.scrollHeight - window.innerHeight;
+      pg.style.transform = 'scaleX(' + (h > 0 ? Math.min(window.scrollY / h, 1) : 0) + ')';
+      tick = false;
+    });
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+})();
+</script>
+
+</body></html>
